@@ -1,0 +1,47 @@
+<header class="sysbar" [class.scrolled]="scrolled()">
+  <div class="scroll-track"><div class="scroll-fill" [style.width.%]="scrollPct()"></div></div>
+
+  <div class="sysbar-inner">
+    <button class="brand" (click)="goTo('home')" aria-label="Go to top">
+      <span class="led cyan"></span>
+      <span class="brand-name">{{ profile.systemName }}</span>
+      <span class="brand-ver">{{ profile.version }}</span>
+    </button>
+
+    <nav class="nav-desktop" aria-label="Sections">
+      @for (link of links; track link.target) {
+        <button class="nav-link" [class.active]="active() === link.target" (click)="goTo(link.target)">
+          <span class="slash">/</span>{{ link.label }}
+        </button>
+      }
+    </nav>
+
+    <div class="right">
+      <button class="palette-btn" (click)="openPalette.emit()" aria-label="Open command palette">
+        <span class="kbd">Ctrl</span><span class="kbd">K</span>
+      </button>
+      <div class="status">
+        <span class="led"></span>
+        <span class="status-text">ONLINE</span>
+      </div>
+      <div class="clock">{{ clock() }}</div>
+
+      <button class="burger" (click)="toggleMenu()" [class.open]="menuOpen()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  @if (menuOpen()) {
+    <nav class="nav-mobile" aria-label="Sections">
+      @for (link of links; track link.target) {
+        <button class="nav-link" [class.active]="active() === link.target" (click)="goTo(link.target)">
+          <span class="slash">/</span>{{ link.label }}
+        </button>
+      }
+      <div class="mobile-meta">
+        <span class="led"></span> ONLINE · {{ clock() }}
+      </div>
+    </nav>
+  }
+</header>

@@ -1,0 +1,17 @@
+@if (booting()) {
+  <app-boot-screen (done)="onBootDone()" />
+} @else {
+  <app-system-bar (openPalette)="paletteOpen.set(true)" />
+
+  <main>
+    <app-hero />
+    <app-skills />
+    <app-experience />
+    <app-projects />
+    <app-contact />
+  </main>
+
+  @if (paletteOpen()) {
+    <app-command-palette (closed)="paletteOpen.set(false)" />
+  }
+}

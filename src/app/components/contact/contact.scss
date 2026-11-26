@@ -1,0 +1,215 @@
+/* ---------- freelance banner (rotating gradient border) ---------- */
+
+.freelance-banner {
+  position: relative;
+  border-radius: var(--radius);
+  padding: 1.5px;
+  overflow: hidden;
+  margin-bottom: 46px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -150%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg 250deg,
+      rgba(251, 191, 36, 0.9) 300deg,
+      var(--accent) 330deg,
+      var(--accent-2) 350deg,
+      transparent 360deg
+    );
+    animation: fb-spin 4.5s linear infinite;
+  }
+}
+
+@keyframes fb-spin { to { transform: rotate(360deg); } }
+
+.fb-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  background:
+    radial-gradient(ellipse 60% 120% at 85% 50%, rgba(251, 191, 36, 0.06), transparent),
+    var(--panel-solid);
+  border-radius: calc(var(--radius) - 1.5px);
+  padding: 26px 30px;
+}
+
+.fb-left {
+  max-width: 640px;
+
+  .fb-mode {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    color: var(--warn);
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 3vw, 1.7rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+
+    .dot-accent { color: var(--warn); }
+  }
+
+  p {
+    color: var(--text-mid);
+    font-size: 0.92rem;
+  }
+}
+
+.fb-cta {
+  flex: none;
+  background: linear-gradient(135deg, #d97706, #fbbf24);
+  color: #1a1002;
+  box-shadow: 0 4px 24px rgba(251, 191, 36, 0.3);
+
+  &:hover { box-shadow: 0 6px 34px rgba(251, 191, 36, 0.5); }
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 44px;
+  align-items: center;
+}
+
+/* ---------- terminal ---------- */
+
+.term-body {
+  padding: 22px 24px 26px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.term-cmd {
+  color: var(--text-mid);
+  margin-bottom: 16px;
+
+  &.second { margin-top: 22px; }
+
+  .user { color: var(--ok); }
+  .path { color: var(--accent-2); }
+  .cursor { color: var(--accent); animation: blink 0.9s steps(1) infinite; }
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.term-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 7px 0;
+
+  .key {
+    width: 88px;
+    flex: none;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: var(--text-low);
+  }
+
+  a, .val {
+    color: var(--text-hi);
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+  a:hover { color: var(--accent); }
+
+  .copy {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    color: var(--accent);
+    background: rgba(34, 211, 238, 0.08);
+    border: 1px solid rgba(34, 211, 238, 0.25);
+    border-radius: 6px;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover { background: rgba(34, 211, 238, 0.16); }
+  }
+}
+
+.term-avail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ok);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+
+  &.freelance { color: var(--warn); }
+}
+
+/* ---------- CTA column ---------- */
+
+.cta-col {
+  h3 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+
+    .dot-accent { color: var(--accent); }
+  }
+
+  p {
+    color: var(--text-mid);
+    margin-bottom: 28px;
+    max-width: 420px;
+  }
+}
+
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  max-width: 320px;
+
+  .btn { justify-content: center; }
+}
+
+/* ---------- footer ---------- */
+
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 26px 0;
+  background: var(--bg-0);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 24px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-low);
+
+  .never { color: var(--accent); }
+}
+
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+  .cta-actions { max-width: none; }
+  .footer-inner { justify-content: center; text-align: center; }
+}

@@ -1,0 +1,97 @@
+<section class="section" id="contact">
+  <div class="container">
+    <div class="sec-head" appReveal>
+      <span class="sec-index">04</span>
+      <h2>Open Connection</h2>
+      <span class="sec-line"></span>
+    </div>
+    <p class="sec-sub" appReveal>$ ssh recruiter&#64;mahesh.sys — connection accepted</p>
+
+    <!-- freelance availability banner -->
+    <div class="freelance-banner" appReveal>
+      <div class="fb-inner">
+        <div class="fb-left">
+          <span class="fb-mode"><span class="led amber"></span> FREELANCE.MODE — ENABLED</span>
+          <h3>Available for freelance &amp; contract projects<span class="dot-accent">.</span></h3>
+          <p>
+            REST APIs · desktop apps · dashboards · Azure automation · full-stack builds —
+            scoped, shipped and supported end-to-end.
+          </p>
+        </div>
+        <a class="btn btn-primary fb-cta" [href]="profile.freelanceMail">
+          ⚡ start a project --now
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="panel term" appReveal>
+        <div class="chrome">
+          <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <span class="chrome-title">mahesh&#64;portfolio: ~/contact</span>
+        </div>
+
+        <div class="term-body">
+          <div class="term-cmd"><span class="user">mahesh&#64;portfolio</span>:<span class="path">~</span>$ ./contact --init</div>
+
+          <div class="term-row">
+            <span class="key">EMAIL</span>
+            <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>
+            <button class="copy" (click)="copyEmail()">{{ copied() ? '✓ copied' : 'copy' }}</button>
+          </div>
+          <div class="term-row">
+            <span class="key">PHONE</span>
+            <a [href]="'tel:' + profile.phone.replace(' ', '')">{{ profile.phone }}</a>
+          </div>
+          <div class="term-row">
+            <span class="key">GITHUB</span>
+            <a [href]="profile.github" target="_blank" rel="noopener">{{ short(profile.github) }} ↗</a>
+          </div>
+          <div class="term-row">
+            <span class="key">LINKEDIN</span>
+            <a [href]="profile.linkedin" target="_blank" rel="noopener">{{ short(profile.linkedin) }} ↗</a>
+          </div>
+          <div class="term-row">
+            <span class="key">LOCATION</span>
+            <span class="val">{{ profile.location }}</span>
+          </div>
+
+          <div class="term-cmd second"><span class="user">mahesh&#64;portfolio</span>:<span class="path">~</span>$ status --availability</div>
+          <div class="term-avail">
+            <span class="led"></span> {{ profile.availability }} — typical response &lt; 24h
+          </div>
+
+          <div class="term-cmd second"><span class="user">mahesh&#64;portfolio</span>:<span class="path">~</span>$ freelance --status</div>
+          <div class="term-avail freelance">
+            <span class="led amber"></span> ⚡ ACCEPTING FREELANCE &amp; CONTRACT PROJECTS
+          </div>
+
+          <div class="term-cmd second">
+            <span class="user">mahesh&#64;portfolio</span>:<span class="path">~</span>$ <span class="cursor">▊</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-col" appReveal [revealDelay]="140">
+        <h3>Let's build something<br>that never goes down<span class="dot-accent">.</span></h3>
+        <p>
+          Whether it's a .NET desktop platform, an Azure-powered backend or a full-stack
+          product — I'm ready to plug into your stack. Reach out and I'll respond fast.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" [href]="'mailto:' + profile.email">✉ send transmission</a>
+          <a class="btn btn-ghost" [href]="profile.linkedin" target="_blank" rel="noopener">connect on linkedin ↗</a>
+          <a class="btn btn-ghost" [href]="profile.resumeUrl" download>⭳ download resume</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span class="f-left">© 2026 {{ profile.name }} — {{ profile.systemName }} {{ profile.version }}</span>
+    <span class="f-mid">$ shutdown -h <span class="never">never</span></span>
+    <span class="f-right">built with Angular · designed as a control panel</span>
+  </div>
+</footer>

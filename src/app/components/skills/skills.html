@@ -1,0 +1,37 @@
+<section class="section" id="skills">
+  <div class="container">
+    <div class="sec-head" appReveal>
+      <span class="sec-index">01</span>
+      <h2>Loaded Modules</h2>
+      <span class="sec-line"></span>
+    </div>
+    <p class="sec-sub" appReveal>$ systemctl list-units --type=skill --state=running</p>
+
+    <div class="mod-grid">
+      @for (mod of modules; track mod.id; let i = $index) {
+        <article class="panel mod-card" appReveal [revealDelay]="(i % 3) * 90">
+          <header class="mod-head">
+            <span class="mod-icon">{{ mod.icon }}</span>
+            <span class="mod-name">{{ mod.name }}</span>
+            <span class="mod-status" [class.stable]="mod.status === 'STABLE'">
+              <span class="led" [class.cyan]="mod.status === 'STABLE'"></span>
+              {{ mod.status }}
+            </span>
+          </header>
+
+          <div class="mod-body">
+            @for (skill of mod.skills; track skill.name) {
+              <div class="skill-row">
+                <span class="skill-name">{{ skill.name }}</span>
+                <div class="skill-bar">
+                  <div class="skill-fill" [style.width.%]="skill.level"></div>
+                </div>
+                <span class="skill-pct">{{ skill.level }}</span>
+              </div>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

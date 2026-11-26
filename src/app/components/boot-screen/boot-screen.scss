@@ -1,0 +1,110 @@
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--bg-0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.45s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent 0 2px, rgba(148, 163, 184, 0.025) 2px 4px);
+    pointer-events: none;
+  }
+
+  &.closing { opacity: 0; }
+}
+
+.boot-inner {
+  width: min(560px, 88vw);
+  font-family: var(--font-mono);
+}
+
+.boot-logo {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--text-hi);
+  margin-bottom: 28px;
+
+  .bracket { color: var(--accent); }
+  .ver {
+    font-size: 0.7rem;
+    color: var(--text-low);
+    letter-spacing: 0.1em;
+    margin-left: 12px;
+    font-weight: 400;
+  }
+}
+
+.boot-lines {
+  min-height: 196px;
+  font-size: 0.8rem;
+  color: var(--text-mid);
+  line-height: 1.9;
+
+  .boot-line {
+    animation: boot-in 0.25s ease both;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .boot-line:last-child { color: var(--text-hi); }
+
+  .cursor {
+    color: var(--accent);
+    animation: blink 0.9s steps(1) infinite;
+  }
+}
+
+@keyframes boot-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.boot-progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+
+  .bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(148, 163, 184, 0.12);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    box-shadow: 0 0 12px var(--glow-accent);
+    transition: width 0.25s ease;
+  }
+  .pct {
+    font-size: 0.72rem;
+    color: var(--accent);
+    min-width: 40px;
+    text-align: right;
+  }
+}
+
+.boot-skip {
+  margin-top: 34px;
+  text-align: center;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-low);
+  animation: blink 2.2s ease infinite;
+}

@@ -1,0 +1,139 @@
+<section class="hero" id="home">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="particles" aria-hidden="true">
+    @for (p of particles; track p) {
+      <span class="pt"></span>
+    }
+  </div>
+
+  <div class="container hero-grid">
+    <!-- left : identity -->
+    <div class="hero-left" appReveal>
+      <div class="chips-row">
+        <div class="avail chip">
+          <span class="led"></span>
+          SYSTEM ONLINE — {{ profile.availability }}
+        </div>
+        <div class="chip freelance-chip">
+          <span class="led amber"></span>
+          ⚡ {{ profile.freelance }}
+        </div>
+      </div>
+
+      <h1 class="hero-name">
+        <span class="hello">$ whoami</span>
+        <span class="shine">Mahesh</span><br><span class="shine">Jaiswal</span><span class="dot-accent">.</span>
+      </h1>
+
+      <div class="role-line">
+        <span class="prompt">&gt;</span>
+        <span class="typed">{{ typedRole() }}</span><span class="caret">▊</span>
+      </div>
+
+      <p class="hero-tagline">{{ profile.tagline }}</p>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary" (click)="scrollTo('projects')">
+          ./view --projects
+        </button>
+        <a class="btn btn-ghost" [href]="profile.resumeUrl" download>
+          ⭳ resume.pdf
+        </a>
+        <a class="btn btn-ghost" [href]="profile.github" target="_blank" rel="noopener">
+          github ↗
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        @for (stat of stats; track stat.label; let i = $index) {
+          <div class="stat">
+            <div class="stat-value">{{ statValues()[i] }}<span class="suffix">{{ stat.suffix }}</span></div>
+            <div class="stat-label">{{ stat.label }}</div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- right : telemetry panel -->
+    <div class="hero-right" appReveal [revealDelay]="150">
+      <div class="tele-tilt" appTilt>
+      <div class="panel tele-panel">
+        <div class="chrome">
+          <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <span class="chrome-title">runtime-monitor — {{ profile.systemName }}</span>
+          <span class="led" style="margin-left:auto"></span>
+        </div>
+
+        <div class="tele-body">
+          <div class="tele-id">
+            <div class="avatar">
+              @if (!photoFailed()) {
+                <img [src]="profile.photoUrl" alt="Mahesh Jaiswal" (error)="photoFailed.set(true)">
+              } @else {
+                <span class="avatar-initials">{{ initials() }}</span>
+              }
+              <span class="avatar-ring" aria-hidden="true"></span>
+            </div>
+            <div class="tele-id-text">
+              <div class="tele-name">{{ profile.name }}</div>
+              <div class="tele-role">Senior Software Engineer · {{ profile.location }}</div>
+              <div class="tele-uptime">
+                <span class="lbl">CAREER UPTIME</span>
+                <span class="val">{{ uptime() }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tele-graph">
+            <div class="graph-head">
+              <span>PERFORMANCE</span>
+              <span class="live"><span class="led cyan"></span> LIVE</span>
+            </div>
+            <div class="canvas-wrap"><canvas #telemetry></canvas></div>
+          </div>
+
+          <div class="tele-metrics">
+            <div class="metric">
+              <span class="m-label">FOCUS</span>
+              <div class="m-bar"><div class="m-fill" [style.width.%]="cpu() + 72"></div></div>
+              <span class="m-val">{{ cpu() + 72 }}%</span>
+            </div>
+            <div class="metric">
+              <span class="m-label">CODE QUALITY</span>
+              <div class="m-bar"><div class="m-fill" style="width: 97%"></div></div>
+              <span class="m-val">97%</span>
+            </div>
+            <div class="metric">
+              <span class="m-label">COFFEE</span>
+              <div class="m-bar"><div class="m-fill warn" [style.width.%]="mem() + 48"></div></div>
+              <span class="m-val">{{ mem() + 48 }}%</span>
+            </div>
+          </div>
+
+          <div class="tele-footer">
+            <span class="chip"><span class="led"></span> watchdog: armed</span>
+            <span class="chip">services: 8/8</span>
+            <span class="chip">faults: 0</span>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      @for (t of ticker; track $index) {
+        <span class="tk">{{ t }}<span class="sep">◆</span></span>
+      }
+      @for (t of ticker; track $index) {
+        <span class="tk">{{ t }}<span class="sep">◆</span></span>
+      }
+    </div>
+  </div>
+
+  <button class="scroll-hint" (click)="scrollTo('skills')" aria-label="Scroll to skills">
+    <span class="mouse"></span>
+    scroll
+  </button>
+</section>

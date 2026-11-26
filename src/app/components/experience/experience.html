@@ -1,0 +1,51 @@
+<section class="section" id="experience">
+  <div class="container">
+    <div class="sec-head" appReveal>
+      <span class="sec-index">02</span>
+      <h2>Process Tree</h2>
+      <span class="sec-line"></span>
+    </div>
+    <p class="sec-sub" appReveal>$ ps --tree --user mahesh --sort=start_time</p>
+
+    <div class="tree">
+      @for (node of timeline; track node.pid; let i = $index; let last = $last) {
+        <div class="tree-node" appReveal [revealDelay]="i * 100">
+          <div class="tree-rail" [class.last]="last">
+            <span class="node-dot" [class.running]="node.status === 'RUNNING'"></span>
+          </div>
+
+          <article class="panel node-card">
+            <header class="node-head">
+              <span class="pid">PID {{ node.pid }}</span>
+              <span class="node-type">{{ node.type === 'work' ? 'process' : 'bootstrap' }}</span>
+              <span class="node-status" [class.done]="node.status !== 'RUNNING'">
+                <span class="led" [class.off]="node.status !== 'RUNNING'"></span>
+                {{ node.status }}
+              </span>
+            </header>
+
+            <div class="node-body">
+              <h3 class="node-role">{{ node.role }}</h3>
+              <div class="node-org">
+                <span class="org">{{ node.org }}</span>
+                <span class="meta">{{ node.period }} · {{ node.location }}</span>
+              </div>
+
+              <ul class="node-bullets">
+                @for (b of node.bullets; track $index) {
+                  <li>{{ b }}</li>
+                }
+              </ul>
+
+              <div class="node-tech">
+                @for (t of node.tech; track t) {
+                  <span class="chip">{{ t }}</span>
+                }
+              </div>
+            </div>
+          </article>
+        </div>
+      }
+    </div>
+  </div>
+</section>

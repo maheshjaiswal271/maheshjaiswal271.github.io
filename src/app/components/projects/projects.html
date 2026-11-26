@@ -1,0 +1,69 @@
+<section class="section" id="projects">
+  <div class="container">
+    <div class="sec-head" appReveal>
+      <span class="sec-index">03</span>
+      <h2>Deployed Services</h2>
+      <span class="sec-line"></span>
+    </div>
+    <p class="sec-sub" appReveal>$ docker ps --filter "author=mahesh" --format table</p>
+
+    <div class="proj-list">
+      @for (p of projects; track p.id; let i = $index) {
+        <article class="panel proj-card" appReveal [revealDelay]="i * 90" appTilt [maxTilt]="2">
+          <div class="chrome">
+            <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+            <span class="chrome-title">{{ p.serviceName }}</span>
+            <span class="proj-status" [class.deployed]="p.status === 'DEPLOYED'">
+              <span class="led" [class.cyan]="p.status === 'DEPLOYED'"></span>
+              {{ p.status }}
+            </span>
+          </div>
+
+          <div class="proj-body">
+            <div class="proj-top">
+              <h3 class="proj-name">{{ p.displayName }}</h3>
+              <div class="proj-meta">
+                <span class="chip">{{ p.version }}</span>
+                <span class="chip">{{ p.year }}</span>
+              </div>
+            </div>
+
+            <p class="proj-tagline">{{ p.tagline }}</p>
+
+            <ul class="proj-bullets">
+              @for (b of p.bullets; track $index) {
+                <li>{{ b }}</li>
+              }
+            </ul>
+
+            <div class="proj-tech">
+              @for (t of p.tech; track t) {
+                <span class="chip">{{ t }}</span>
+              }
+            </div>
+
+            <div class="proj-actions">
+              <button class="btn btn-ghost logs-btn" (click)="toggleLogs(p.id)">
+                @if (openLogs() === p.id) { ▾ hide logs } @else { ▸ tail -f logs }
+              </button>
+              <a class="btn btn-ghost" [href]="p.link || profile.github" target="_blank" rel="noopener">
+                source ↗
+              </a>
+            </div>
+
+            @if (openLogs() === p.id) {
+              <div class="proj-logs">
+                @for (line of p.logs; track $index) {
+                  <div class="log-line" [style.animation-delay.ms]="$index * 120">{{ line }}</div>
+                }
+                <div class="log-line cursor-line" [style.animation-delay.ms]="p.logs.length * 120">
+                  <span class="cursor">▊</span>
+                </div>
+              </div>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

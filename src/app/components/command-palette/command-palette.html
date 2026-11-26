@@ -1,0 +1,39 @@
+<div class="cp-backdrop" (click)="closed.emit()">
+  <div class="cp panel" (click)="$event.stopPropagation()" role="dialog" aria-label="Command palette">
+    <div class="cp-search">
+      <span class="cp-prompt">&gt;_</span>
+      <input
+        #searchInput
+        type="text"
+        placeholder="type a command or search..."
+        [value]="query()"
+        (input)="onQuery(searchInput.value)"
+        aria-label="Search commands"
+      />
+      <span class="cp-esc">esc</span>
+    </div>
+
+    <div class="cp-list">
+      @for (cmd of filtered(); track cmd.id; let i = $index) {
+        <button
+          class="cp-item"
+          [class.selected]="i === selected()"
+          (click)="run(cmd)"
+          (mouseenter)="selected.set(i)"
+        >
+          <span class="cp-icon">{{ cmd.icon }}</span>
+          <span class="cp-label">{{ cmd.label }}</span>
+          <span class="cp-hint">{{ cmd.hint }}</span>
+        </button>
+      } @empty {
+        <div class="cp-empty">command not found: {{ query() }}</div>
+      }
+    </div>
+
+    <div class="cp-footer">
+      <span><b>↑↓</b> navigate</span>
+      <span><b>↵</b> execute</span>
+      <span><b>esc</b> close</span>
+    </div>
+  </div>
+</div>

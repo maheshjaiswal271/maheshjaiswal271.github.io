@@ -1,0 +1,22 @@
+<div class="boot" [class.closing]="closing()" (click)="skip()" role="status" aria-label="Booting portfolio">
+  <div class="boot-inner">
+    <div class="boot-logo">
+      <span class="bracket">[</span>{{ profile.systemName }}<span class="bracket">]</span>
+      <span class="ver">{{ profile.version }}</span>
+    </div>
+
+    <div class="boot-lines">
+      @for (line of lines(); track $index) {
+        <div class="boot-line">{{ line }}</div>
+      }
+      <span class="cursor">▊</span>
+    </div>
+
+    <div class="boot-progress">
+      <div class="bar"><div class="fill" [style.width.%]="progress()"></div></div>
+      <span class="pct">{{ progress() }}%</span>
+    </div>
+
+    <div class="boot-skip">press anywhere to skip</div>
+  </div>
+</div>

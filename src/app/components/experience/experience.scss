@@ -1,0 +1,130 @@
+.tree {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  max-width: 860px;
+}
+
+.tree-node {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 14px;
+}
+
+.tree-rail {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 26px;
+    bottom: -26px;
+    width: 1.5px;
+    background: linear-gradient(180deg, rgba(34, 211, 238, 0.4), var(--line-strong));
+  }
+
+  &.last::before { display: none; }
+
+  .node-dot {
+    width: 13px; height: 13px;
+    margin-top: 14px;
+    border-radius: 50%;
+    background: var(--bg-2);
+    border: 2px solid var(--text-low);
+    z-index: 1;
+
+    &.running {
+      border-color: var(--ok);
+      background: var(--ok);
+      box-shadow: 0 0 14px var(--glow-ok);
+      animation: led-pulse 2s ease-in-out infinite;
+    }
+  }
+}
+
+.node-card {
+  transition: border-color 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    border-color: rgba(34, 211, 238, 0.3);
+    transform: translateX(4px);
+  }
+}
+
+.node-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 20px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+
+  .pid { font-size: 0.68rem; color: var(--accent); letter-spacing: 0.08em; }
+  .node-type { font-size: 0.68rem; color: var(--text-low); }
+
+  .node-status {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    color: var(--ok);
+
+    &.done { color: var(--text-low); }
+  }
+}
+
+.node-body { padding: 20px 22px 22px; }
+
+.node-role {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.node-org {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-bottom: 16px;
+
+  .org { color: var(--accent); font-weight: 600; font-size: 0.95rem; }
+  .meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-low); align-self: center; }
+}
+
+.node-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 18px;
+
+  li {
+    position: relative;
+    padding-left: 22px;
+    color: var(--text-mid);
+    font-size: 0.9rem;
+
+    &::before {
+      content: '▸';
+      position: absolute;
+      left: 2px;
+      color: var(--accent);
+    }
+  }
+}
+
+.node-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 640px) {
+  .tree-node { grid-template-columns: 22px 1fr; gap: 10px; }
+  .node-head { flex-wrap: wrap; gap: 8px 14px; padding: 11px 16px; }
+  .node-body { padding: 18px 16px; }
+}
